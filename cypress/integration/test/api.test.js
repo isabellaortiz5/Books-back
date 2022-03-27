@@ -15,13 +15,13 @@ describe("API test", () =>{
         })
     })
 
-    it("POST - add book",() =>{
+    it("forced POST - add book",() =>{
         cy.request({
             method: 'POST', 
             url: "http://localhost:8080/books",
             body: {
-                name: "Cien años de soledad",
-                author:"Gabriel García Márquez" 
+                name: "Divina Commedia",
+                author:"Dante Alighieri" 
             }
         }).then((response) =>{
             expect(response.status).to.eq(200)
@@ -31,27 +31,37 @@ describe("API test", () =>{
             assert.isNotNull(response.body.name)
             assert.isNotNull(response.body.author)
 
-            expect(response.body.name).to.equal("Cien años de soledad")
-            expect(response.body.author).to.equal("Gabriel García Márquez")
+            expect(response.body.name).to.equal("Divina Commedia")
+            expect(response.body.author).to.equal("Dante Alighieri")
         })
     })
 
-    /*
+    it.only("self POST - add book",() =>{
+        cy.intercept({
+            method: 'POST', 
+            url: "http://localhost:8080/books", 
+        }).as("book_create")
 
-    it("POST - add book",() =>{
-        const item = {"name":"Cien años de soledad","author":"Gabriel García Márquez"}
+        cy.get(".table-button.ant-btn.ant-btn-primary").click()
+        cy.get("#name").click()
+        cy.wait(500).get("#name").type("rayuela")
+        cy.wait(500).get("#author").type("julio cortázar")
+        cy.contains('Save').click()
 
-        cy.request('POST',"http://localhost:8080/books", item)
-        .its('body')
-        .should('include',{name:"Cien años de soledad",author:"Gabriel García Márquez"})
+        cy.wait('@book_create')
+        .then( (response) =>{
+            expect(response.state).to.equal("Complete")
+            assert.isNotNull(response.id)
+            assert.isNotNaN(response.id)
 
+            assert.isNotNull(response.request.body.name)
+            assert.isNotNull(response.request.body.author)
+
+            expect(response.request.body.name).to.equal("rayuela")
+            expect(response.request.body.author).to.equal("julio cortázar")
+
+            expect(response.response.statusCode).to.eq(200)
+        })
     })
 
-    it("PUT - book",() =>{
-        const item = {"name":"Cien años de soledad"}
-
-        //cy.request('PUT',"http://localhost:8080/books", item)
-        //.its('body')
-    })
-    */
 })
