@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('Delete book request', () => {
+describe('Delete test', () => {
     beforeEach(() =>{
         //set-up
         cy.visit('http://localhost:4200/dashboard')

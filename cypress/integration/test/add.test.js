@@ -1,5 +1,5 @@
 /// <reference types="cypress"/>
-describe("API test", () =>{
+describe("Add test", () =>{
     beforeEach(() =>{
         //set-up
         cy.visit('http://localhost:4200/dashboard')
