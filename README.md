@@ -1,30 +1,34 @@
-# Library API - Automation Training
+# BACK TESTS
 
-This repository was created in order to training to automation testing practices from scratch.
+Este repositorio fue creado para probar el backend de una libreria online.
 
-This repository is only the Back End part, please check the [front repository](https://github.com/AgileTestingColombia/books-ui) in order to have all the application
+## API Test
 
-## How To Deploy the application
+ 
+Primero hay un set up donde se visita la página.
 
-This applications is thinking to deploy in [Heroku](https://www.heroku.com/) and uses the following environment varibles:
+## Add Test 
 
-| Env Variable     | Description                    | Value  |
-|------------------|--------------------------------|--------|
-| ALLOWED_ORIGINS  | Allowed URL to consume the API |        |
+### Forced POST - add book
 
-**Note 1**: In order to set these environment variables in Heroku check [the documentation](https://devcenter.heroku.com/articles/config-vars)
+Valida que se agregue un libro mandandole un request con el libro a crear a la página.
 
-## How To Update your fork repository
+### self POST - add book
 
-Run the following commands:
+Valida que se agregue un libro con el request que genera la página.
 
-```bash
-  git remote add upstream git@github.com:AgileTestingColombia/books-back.git
-  git pull upstream main
-```
+### GET body 
 
-If you have altered it, you then need to rebase it.
+Valida que exista el contenido de la página.
 
-```bash
-  git rebase upstream/main
-````
+## Delete Test 
+ 
+Primero hay un set up donde se visita la página
+
+### Create book test 
+
+Valida que se pueda añadir un libro.
+
+## PUT - edit book
+
+Valida que se pueda editar un libro.
