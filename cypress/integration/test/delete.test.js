@@ -30,7 +30,7 @@ describe('Delete test', () => {
 
     })
 
-    it("Invalid DELETE - delete book",() =>{
+    it("no id DELETE - delete book",() =>{
         cy.request({
             failOnStatusCode: false,
             method: 'DELETE',
@@ -42,7 +42,7 @@ describe('Delete test', () => {
     })
 
     
-    it("Invalid DELETE - delete book",() =>{
+    it("Invalid id DELETE - delete book",() =>{
         cy.request({
             failOnStatusCode: false,
             method: 'DELETE',

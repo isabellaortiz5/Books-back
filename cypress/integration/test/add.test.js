@@ -76,16 +76,4 @@ describe("Add test", () =>{
         })
     })
 
-
-    it("Invalid POST - add book",() =>{
-        cy.request({
-            failOnStatusCode: false,
-            method: 'POST', 
-            url: "http://localhost:8080/books",
-            
-        }).then((response) =>{
-            expect(response.status).to.eq(400)
-        })
-        
-    })
 })
