@@ -7,8 +7,6 @@ Este repositorio fue creado para probar el backend de una libreria online.
 ### setup
 Visita la página por medio de la url: http://localhost:4200/dashboard
 
-## API Test
-
 ### verify request returns JSON
 Se verifica que la página se cargue con el contenido en formato json.
 
@@ -55,6 +53,9 @@ Se valida que al lanzar una solicitud DELETE con un id invalido en la url se ret
 
 ## Edit Test
 Valida que se pueda editar un libro.
+
+### setup
+Visita la página por medio de la url: http://localhost:4200/dashboard
 
 ### PUT - edit book
 Se valida que al lanzar una solicitud PUT a un libro se edite acorde a los paramteros de la solicitud.
