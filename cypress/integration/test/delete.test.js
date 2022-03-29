@@ -38,9 +38,9 @@ describe('Delete test', () => {
             
         }).then((response) =>{
             expect(response.status).to.eq(405)
-        })
-        
+        })   
     })
+
     it("Invalid DELETE - delete book",() =>{
         cy.request({
             failOnStatusCode: false,
