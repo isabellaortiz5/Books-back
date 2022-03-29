@@ -5,7 +5,7 @@ describe('Delete test', () => {
         //set-up
         cy.visit('http://localhost:4200/dashboard')
     })
-    it('create book test', () => {
+    it('create and delete book test', () => {
         cy.request({
             method: 'POST',
             url: 'http://localhost:8080/books',
@@ -27,5 +27,28 @@ describe('Delete test', () => {
                     expect(res.status).to.eq(200)
                 })
         })    
+
+    })
+
+    it("Invalid DELETE - delete book",() =>{
+        cy.request({
+            failOnStatusCode: false,
+            method: 'DELETE',
+            url: 'http://localhost:8080/books/'
+            
+        }).then((response) =>{
+            expect(response.status).to.eq(405)
+        })
+        
+    })
+    it("Invalid DELETE - delete book",() =>{
+        cy.request({
+            failOnStatusCode: false,
+            method: 'DELETE',
+            url: 'http://localhost:8080/books/jnjnjnn'
+            
+        }).then((response) =>{
+           expect(response.status).not.to.eq(200)
+        })
     })
 })

@@ -5,7 +5,7 @@ describe("Add test", () =>{
         cy.visit('http://localhost:4200/dashboard')
     })
 
-    it("forced POST - add book",() =>{
+    it("Add a new item & Verify exists",() =>{
         cy.request({
             method: 'POST', 
             url: "http://localhost:8080/books",
@@ -13,19 +13,40 @@ describe("Add test", () =>{
                 name: "Divina Commedia",
                 author:"Dante Alighieri" 
             }
-        })
-        .then((response) =>{
+        }).then((response) =>{
             expect(response.status).to.eq(200)
-            assert.isNotNull(response.body.id)
-            assert.isNotNaN(response.body.id)
 
-            assert.isNotNull(response.body.name)
-            assert.isNotNull(response.body.author)
+            expect(response.body).to.have.property("name", "Divina Commedia")
+            expect(response.body).to.have.property("author", "Dante Alighieri")
 
-            expect(response.body.name).to.equal("Divina Commedia")
-            expect(response.body.author).to.equal("Dante Alighieri")
         })
     })
+
+    it("forced POST - adding empty book",() =>{
+        cy.request({
+            method: 'POST', 
+            url: "http://localhost:8080/books",
+            body: {
+                name: "",
+                author:"" 
+            }
+        })
+        .then((response) =>{
+            expect(response.status).not.to.eq(200)
+        })
+    })
+
+    it("Empty POST",() =>{
+        cy.request({
+            failOnStatusCode: false,
+            method: 'POST', 
+            url: "http://localhost:8080/books",
+        })
+        .then((response) =>{
+            expect(response.status).to.eq(400)
+        })
+    })
+
 
     it("self POST - add book",() =>{
         cy.intercept({
@@ -55,4 +76,16 @@ describe("Add test", () =>{
         })
     })
 
+
+    it("Invalid POST - add book",() =>{
+        cy.request({
+            failOnStatusCode: false,
+            method: 'POST', 
+            url: "http://localhost:8080/books",
+            
+        }).then((response) =>{
+            expect(response.status).to.eq(400)
+        })
+        
+    })
 })
